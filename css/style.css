@@ -1,0 +1,504 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: all 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #3498db;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hidden-section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #2c3e50;
+    color: white;
+    margin-top: 2rem;
+}
+
+/* Chess Board Styles */
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.board-container {
+    flex: 1;
+    min-width: 400px;
+}
+
+.chess-board {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border: 2px solid #333;
+}
+
+.square {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-square {
+    background-color: #f0d9b5;
+}
+
+.black-square {
+    background-color: #b58863;
+}
+
+/* Game Controls Styles */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.game-controls button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.game-controls button:hover {
+    background-color: #2980b9;
+}
+
+.game-controls button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Game Info Styles */
+.game-info {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.player-info, .move-history, .game-status {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.player-info h3, .move-history h3, .game-status h3 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.white-player h3 {
+    color: #333;
+}
+
+.black-player h3 {
+    color: #333;
+}
+
+.ai-player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thinking-indicator {
+    display: none;
+}
+
+.thinking-indicator.active {
+    display: flex;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+#moves-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.move-row {
+    display: flex;
+}
+
+.move-number {
+    width: 30px;
+    font-weight: bold;
+}
+
+.white-move, .black-move {
+    padding: 2px 5px;
+    margin: 1px;
+    flex: 1;
+}
+
+.current-move {
+    background-color: #f0e68c;
+    border-radius: 3px;
+}
+
+#thinking-content {
+    max-height: 150px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+}
+
+/* Settings Styles */
+.settings-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.settings-container h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.player-settings, .general-settings {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.player-settings h3, .general-settings h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.setting-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.setting-group label {
+    width: 180px;
+    font-weight: 500;
+}
+
+.setting-group input[type="text"],
+.setting-group input[type="password"],
+.setting-group input[type="number"],
+.setting-group select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.setting-group input[type="range"] {
+    flex: 1;
+    max-width: 200px;
+    margin-right: 10px;
+}
+
+.toggle-password {
+    margin-left: 10px;
+    padding: 0.5rem;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.settings-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.settings-controls button {
+    padding: 0.75rem 1.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.settings-controls button:hover {
+    background-color: #2980b9;
+}
+
+#reset-settings {
+    background-color: #e74c3c;
+}
+
+#reset-settings:hover {
+    background-color: #c0392b;
+}
+
+/* History Section Styles */
+.history-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+#games-list {
+    flex: 1;
+    min-width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.game-item {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.game-item:hover {
+    background-color: #e0f7fa;
+}
+
+.game-item.selected {
+    background-color: #bbdefb;
+    border-left: 4px solid #2196f3;
+}
+
+#game-replay {
+    flex: 2;
+    min-width: 400px;
+}
+
+#replay-board {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.replay-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.replay-controls button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#replay-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Notification Styles */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+
+.notification {
+    background-color: #f8f9fa;
+    border-left: 4px solid;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 15px;
+    animation: slide-in 0.3s ease-out;
+    position: relative;
+}
+
+.notification.success {
+    border-left-color: var(--success-color);
+}
+
+.notification.error {
+    border-left-color: var(--danger-color);
+}
+
+.notification.fade-out {
+    animation: fade-out 0.5s ease-out forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+    }
+
+    nav ul li {
+        margin-left: 0.75rem;
+    }
+
+    .game-container {
+        flex-direction: column;
+    }
+
+    .chess-board {
+        max-width: 100%;
+    }
+
+    .setting-group label {
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .setting-group input[type="text"],
+    .setting-group input[type="password"],
+    .setting-group input[type="number"],
+    .setting-group select,
+    .setting-group input[type="range"] {
+        max-width: 100%;
+    }
+}

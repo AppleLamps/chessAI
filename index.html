@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsurf Chess - AI vs AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Windsurf Chess</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="active" id="game-tab">Game</a></li>
+                <li><a href="#" id="settings-tab">Settings</a></li>
+                <li><a href="#" id="history-tab">Game History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Game Section -->
+        <section id="game-section" class="active-section">
+            <div class="game-container">
+                <div class="board-container">
+                    <div id="chess-board" class="chess-board"></div>
+                    <div class="game-controls">
+                        <button id="start-game">Start Game</button>
+                        <button id="pause-game" disabled>Pause</button>
+                        <button id="reset-game">Reset</button>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <div class="player-info white-player">
+                        <h3>White Player</h3>
+                        <div class="ai-player" id="white-player-info">
+                            <div class="ai-model">Model: <span id="white-model">Not set</span></div>
+                            <div class="thinking-indicator" id="white-thinking">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="move-history">
+                        <h3>Move History</h3>
+                        <div id="moves-container"></div>
+                    </div>
+                    <div class="player-info black-player">
+                        <h3>Black Player</h3>
+                        <div class="ai-player" id="black-player-info">
+                            <div class="ai-model">Model: <span id="black-model">Not set</span></div>
+                            <div class="thinking-indicator" id="black-thinking">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-status">
+                        <h3>Game Status</h3>
+                        <div id="game-status">Ready</div>
+                        <div id="thinking-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings-section" class="hidden-section">
+            <div class="settings-container">
+                <h2>AI Players Configuration</h2>
+                
+                <div class="player-settings">
+                    <h3>White Player</h3>
+                    <div class="setting-group">
+                        <label for="white-provider">AI Provider:</label>
+                        <select id="white-provider" class="provider-select">
+                            <option value="">Select Provider</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="xai">xAI</option>
+                            <option value="gemini">Google Gemini</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="white-model">Model:</label>
+                        <select id="white-model-select" disabled>
+                            <option value="">Select Model</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="white-api-key">API Key:</label>
+                        <input type="password" id="white-api-key" placeholder="Enter API Key">
+                        <button class="toggle-password" data-target="white-api-key">Show</button>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="white-streaming">Enable Streaming:</label>
+                        <input type="checkbox" id="white-streaming" checked>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="white-temperature">Temperature:</label>
+                        <input type="range" id="white-temperature" min="0" max="2" step="0.1" value="0.7">
+                        <span id="white-temperature-value">0.7</span>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="white-max-tokens">Max Tokens:</label>
+                        <input type="number" id="white-max-tokens" min="100" max="4096" value="1024">
+                    </div>
+                </div>
+                
+                <div class="player-settings">
+                    <h3>Black Player</h3>
+                    <div class="setting-group">
+                        <label for="black-provider">AI Provider:</label>
+                        <select id="black-provider" class="provider-select">
+                            <option value="">Select Provider</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="xai">xAI</option>
+                            <option value="gemini">Google Gemini</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="black-model">Model:</label>
+                        <select id="black-model-select" disabled>
+                            <option value="">Select Model</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="black-api-key">API Key:</label>
+                        <input type="password" id="black-api-key" placeholder="Enter API Key">
+                        <button class="toggle-password" data-target="black-api-key">Show</button>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="black-streaming">Enable Streaming:</label>
+                        <input type="checkbox" id="black-streaming" checked>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="black-temperature">Temperature:</label>
+                        <input type="range" id="black-temperature" min="0" max="2" step="0.1" value="0.7">
+                        <span id="black-temperature-value">0.7</span>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="black-max-tokens">Max Tokens:</label>
+                        <input type="number" id="black-max-tokens" min="100" max="4096" value="1024">
+                    </div>
+                </div>
+                
+                <div class="general-settings">
+                    <h3>General Settings</h3>
+                    <div class="setting-group">
+                        <label for="max-retries">Max Retries for Invalid Moves:</label>
+                        <input type="number" id="max-retries" min="1" max="10" value="3">
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="move-delay">Delay Between Moves (ms):</label>
+                        <input type="number" id="move-delay" min="0" max="10000" step="500" value="1000">
+                    </div>
+                </div>
+                
+                <div class="settings-controls">
+                    <button id="save-settings">Save Settings</button>
+                    <button id="reset-settings">Reset to Defaults</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history-section" class="hidden-section">
+            <div class="history-container">
+                <h2>Game History</h2>
+                <div id="games-list"></div>
+                <div id="game-replay">
+                    <div id="replay-board" class="chess-board"></div>
+                    <div class="replay-controls">
+                        <button id="prev-move">Previous</button>
+                        <button id="next-move">Next</button>
+                        <button id="auto-replay">Auto Replay</button>
+                    </div>
+                    <div id="replay-info"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Windsurf Chess &copy; 2025 - AI vs AI Chess Platform</p>
+    </footer>
+
+    <!-- JavaScript files -->
+    <!-- External libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    
+    <!-- Application scripts -->
+    <script src="js/o-models.js"></script>
+    <script src="js/grok.js"></script>
+    <script src="js/ai-models.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
