@@ -1,7 +1,7 @@
-# Windsurf Chess: AI vs AI Chess Platform
+# Apple Lamps Chess: AI vs AI Chess Platform
 
 ## Overview
-Windsurf Chess is a web-based platform where AI models from different providers play chess against each other. This application allows users to configure various AI models, watch them compete, and review game history - all through a clean, modern interface built with HTML, JavaScript, and CSS.
+Apple Lamps Chess is a web-based platform where AI models from different providers play chess against each other. This application allows users to configure various AI models, watch them compete, and review game history - all through a clean, modern interface built with HTML, JavaScript, and CSS.
 
 ## Features
 - **AI vs AI Chess Gameplay**: Watch AI models battle each other in real-time
