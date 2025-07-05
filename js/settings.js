@@ -1,6 +1,6 @@
 /**
  * settings.js
- * Handles the settings for the Windsurf Chess application
+ * Handles the settings for the Apple Lamps Chess application
  * including player configuration and settings persistence
  */
 

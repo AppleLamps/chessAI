@@ -2,7 +2,7 @@
  * chess.js - Wrapper for the chess.js library
  * 
  * This file wraps the chess.js library loaded from CDN with additional
- * helper methods needed for the Windsurf Chess application.
+ * helper methods needed for the Apple Lamps Chess application.
  */
 
 // The global Chess class is already defined by the chess.js library loaded from CDN

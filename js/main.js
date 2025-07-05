@@ -1,6 +1,6 @@
 /**
  * main.js
- * Main application script for Windsurf Chess
+ * Main application script for Apple Lamps Chess
  * Handles initialization and navigation
  */
 

@@ -1,6 +1,6 @@
 /**
  * game.js
- * Handles the game logic and AI orchestration for Windsurf Chess
+ * Handles the game logic and AI orchestration for Apple Lamps Chess
  */
 
 class Game {
